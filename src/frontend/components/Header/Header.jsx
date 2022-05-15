@@ -1,5 +1,6 @@
 import { faBars, faBook, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router-dom";
 import "./Header.css";
 function Header() {
 	return (
@@ -17,9 +18,11 @@ function Header() {
 					<FontAwesomeIcon icon={faSearch} className="text-white text-lg" />
 				</button>
 			</div>
-			<div className="avatar flex-container">
-				<div className="avatar-content text-white font-bold">R</div>
-			</div>
+			<NavLink to="/profile">
+				<div className="avatar flex-container">
+					<div className="avatar-content text-white font-bold">R</div>
+				</div>
+			</NavLink>
 		</header>
 	);
 }

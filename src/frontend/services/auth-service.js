@@ -1,5 +1,9 @@
 import axios from "axios";
-import { API_LOGIN, API_SIGNUP } from "../constants/api-constant";
+import {
+	API_LOGIN,
+	API_SIGNUP,
+	API_USER_PROFILE,
+} from "../constants/api-constant";
 import { notify } from "../utils/notify";
 import { error, success } from "../constants/toast-constants";
 
@@ -54,5 +58,25 @@ export const signup = async ({ firstName, lastName, email, password }) => {
 			notify(error, "Internal Error");
 		}
 		return {};
+	}
+};
+
+/**
+ * Get user profile
+ * @param {string} authToken
+ * @return user
+ */
+export const getUserDetails = async (authToken) => {
+	try {
+		const {
+			data: { user },
+		} = await axios.get(API_USER_PROFILE, {
+			headers: {
+				authorization: authToken,
+			},
+		});
+		return user;
+	} catch (err) {
+		console.error(err);
 	}
 };
