@@ -1,0 +1,29 @@
+.form-container {
+	min-width: 40rem;
+	padding: 5rem;
+	border-radius: 10px;
+	background-color: var(--white);
+}
+
+.form-container .input-container {
+	width: 100%;
+	max-width: none;
+}
+
+.form-container .input-wrap {
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.form-heading {
+	margin-bottom: 2rem;
+}
+
+.form-container .btn {
+	width: 100%;
+}
+
+.form-link {
+	margin-top: 1rem;
+	color: var(--primary-blue);
+}
