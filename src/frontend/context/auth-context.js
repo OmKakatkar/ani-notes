@@ -24,10 +24,11 @@ const AuthProvider = ({ children }) => {
 		}
 	};
 
-	const handleSignUp = async ({ name, email, password }) => {
+	const handleSignUp = async ({ firstName, lastName, email, password }) => {
 		try {
 			const { createdUser: user, encodedToken: token } = await signup({
-				name,
+				firstName,
+				lastName,
 				email,
 				password,
 			});
