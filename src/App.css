@@ -1,0 +1,44 @@
+@import url("https://ani-design.netlify.app/css/main.css");
+
+:root {
+	--clr-primary-background: #272626;
+	--clr-primary-background-lighter: #a7a7a72a;
+	--clr-secondary-background: #313030;
+	--clr-secondary-background-lighter: #6b6b6b;
+	--clr-primary-contrast: #d3d0d0;
+	--clr-overlay: #1d1d1d94;
+	--clr-brand-primary: #75b9ff;
+	--height-header: 6rem;
+	--height-footer: 5rem;
+	--width-sidebar: 25rem;
+	--padding-1r: 1rem;
+	--padding-1r-2r: 1rem 2rem;
+	--transition-background-fast: background-color 200ms ease-in-out;
+}
+
+html,
+body,
+.app {
+	min-height: auto;
+}
+
+body {
+	background-color: var(--clr-primary-background);
+}
+
+body::-webkit-scrollbar {
+	width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+	background: var(--clr-primary-background);
+}
+
+body::-webkit-scrollbar-thumb {
+	border-radius: 100px;
+	background: var(--clr-secondary-background-lighter);
+}
+
+.app {
+	background-color: var(--clr-primary-background);
+}

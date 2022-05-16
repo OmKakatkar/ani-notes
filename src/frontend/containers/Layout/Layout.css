@@ -1,0 +1,12 @@
+.main-container {
+	margin-left: var(--width-sidebar);
+	margin-top: var(--height-header);
+}
+
+.main-container-body {
+	padding: var(--padding-1r);
+}
+
+.main-container-body-offset {
+	padding-top: calc(var(--height-header) + var(--padding-1r));
+}

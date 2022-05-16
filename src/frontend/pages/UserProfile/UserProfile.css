@@ -1,0 +1,10 @@
+.profile-wrapper {
+	margin-top: 5rem;
+	border: 2px solid var(--clr-primary-contrast);
+	padding: var(--padding-1r);
+}
+
+.profile-wrapper button {
+	margin-top: 2rem;
+	width: 100%;
+}
