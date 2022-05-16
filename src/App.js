@@ -6,6 +6,7 @@ import Login from "./frontend/pages/Auth/Login/Login";
 import SignUp from "./frontend/pages/Auth/SignUp/SignUp";
 import MockAPI from "./frontend/mock/MockAPI";
 import UserProfile from "./frontend/pages/UserProfile/UserProfile";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 	return (
@@ -26,6 +27,7 @@ function App() {
 				<Route path="mock" element={<MockAPI />} />
 				<Route path="*" />
 			</Routes>
+			<ToastContainer autoClose={2000} />
 		</div>
 	);
 }
