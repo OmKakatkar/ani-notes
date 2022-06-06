@@ -1,0 +1,17 @@
+.modal {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	background-color: var(--clr-overlay);
+}
+
+.modal-body {
+	background-color: var(--clr-secondary-background);
+	border-radius: 1rem;
+	max-height: 50vh;
+	width: 20vw;
+	position: relative;
+}

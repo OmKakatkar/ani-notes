@@ -47,4 +47,48 @@ export const getAllNotes = async (authToken) => {
 	}
 };
 
-// TODO: Add a update function
+/**
+ * Update note
+ * @param {string} authToken
+ * @param {object} note
+ * @return notes
+ */
+export const updateNote = async (note, authToken) => {
+	try {
+		const { data } = await axios.post(
+			`${API_NOTES}/${note._id}`,
+			{
+				note,
+			},
+			{
+				headers: {
+					authorization: authToken,
+				},
+			}
+		);
+		notify(success, "Note Updated!");
+		return data.notes;
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+/**
+ * Delete note permanantly
+ * @param {string} authToken
+ * @param {string} noteId
+ * @return notes
+ */
+export const deleteNotePermanent = async (noteId, authToken) => {
+	try {
+		const { data } = await axios.delete(`${API_NOTES}/${noteId}`, {
+			headers: {
+				authorization: authToken,
+			},
+		});
+		notify(success, "Note Deleted!");
+		return data.notes;
+	} catch (err) {
+		console.error(err);
+	}
+};

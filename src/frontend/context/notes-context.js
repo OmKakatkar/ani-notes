@@ -1,10 +1,19 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { ARCHIVES, NOTES, TRASH } from "../constants/reducer-constants";
+import {
+	ARCHIVES,
+	CLOSE_NOTE_UPDATE_MODAL,
+	NOTES,
+	OPEN_NOTE_UPDATE_MODAL,
+	TRASH,
+	UPDATE_NOTE,
+} from "../constants/reducer-constants";
 import { useAuth } from "./auth-context";
 
 const NotesContext = createContext();
 
 const intialData = {
+	showNoteUpdateModal: false,
+	currentNote: {},
 	notes: [],
 	archives: [],
 	trash: [],
@@ -12,6 +21,20 @@ const intialData = {
 
 const reducer = (state, action) => {
 	switch (action.type) {
+		case OPEN_NOTE_UPDATE_MODAL:
+			return {
+				...state,
+				showNoteUpdateModal: true,
+				currentNote: action.payload.currentNote,
+			};
+		case CLOSE_NOTE_UPDATE_MODAL:
+			return { ...state, showNoteUpdateModal: false, currentNote: {} };
+		case UPDATE_NOTE:
+			return {
+				...state,
+				showNoteUpdateModal: false,
+				notes: [...action.payload.notes],
+			};
 		case NOTES:
 			return { ...state, notes: [...action.payload.notes] };
 		case ARCHIVES:
@@ -26,7 +49,8 @@ const reducer = (state, action) => {
 const NotesProvider = ({ children }) => {
 	const { user } = useAuth();
 	const [state, dispatch] = useReducer(reducer, intialData);
-	const { notes, archives, trash } = state;
+	const { notes, archives, trash, showNoteUpdateModal, currentNote } = state;
+
 	useEffect(() => {
 		if (user.token) {
 			dispatch({ type: NOTES, payload: { notes: user.user.notes } });
@@ -34,8 +58,15 @@ const NotesProvider = ({ children }) => {
 			dispatch({ type: TRASH, payload: { trash: user.user.trash } });
 		}
 	}, [user]);
-	console.log(state);
-	const providerData = { dispatch, notes, archives, trash };
+
+	const providerData = {
+		dispatch,
+		notes,
+		archives,
+		trash,
+		showNoteUpdateModal,
+		currentNote,
+	};
 	return (
 		<NotesContext.Provider value={providerData}>
 			{children}
