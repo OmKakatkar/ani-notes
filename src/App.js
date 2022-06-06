@@ -8,6 +8,7 @@ import MockAPI from "./frontend/mock/MockAPI";
 import UserProfile from "./frontend/pages/UserProfile/UserProfile";
 import { ToastContainer } from "react-toastify";
 import NewNote from "./frontend/pages/NewNote/NewNote";
+import Archives from "./frontend/pages/Archives/Archives";
 import Trash from "./frontend/pages/Trash/Trash";
 import Notes from "./frontend/pages/Notes/Notes";
 
@@ -25,6 +26,7 @@ function App() {
 					<Route path="/" element={<Notes />} />
 					<Route path="/profile" element={<UserProfile />} />
 					<Route path="/new-note" element={<NewNote />} />
+					<Route path="/archived" element={<Archives />} />
 					<Route path="/bin" element={<Trash />} />
 				</Route>
 				<Route path="login" element={<Login />} />

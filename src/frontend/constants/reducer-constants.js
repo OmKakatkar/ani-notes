@@ -7,3 +7,5 @@ export const CLOSE_NOTE_UPDATE_MODAL = "CLOSE_NOTE_UPDATE_MODAL";
 export const UPDATE_NOTE = "UPDATE_NOTE";
 export const TRASH_NOTE = "TRASH_NOTE";
 export const RESTORE_NOTE = "RESTORE_NOTE";
+export const ARCHIVE_NOTE = "ARCHIVE_NOTE";
+export const UNARCHIVE_NOTE = "UNARCHIVE_NOTE";

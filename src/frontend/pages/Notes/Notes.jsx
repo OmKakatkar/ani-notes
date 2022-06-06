@@ -7,11 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoteCard from "../../components/NoteCard/NoteCard";
 import NoteUpdateModal from "../../components/NoteUpdateModal/NoteUpdateModal";
 import {
+	ARCHIVE_NOTE,
 	OPEN_NOTE_UPDATE_MODAL,
 	TRASH_NOTE,
 } from "../../constants/reducer-constants";
 import { useAuth } from "../../context/auth-context";
 import { useNotes } from "../../context/notes-context";
+import { addToArchives } from "../../services/notes-archive-service";
 import { addToTrash } from "../../services/notes-trash-service";
 
 function Notes() {
@@ -25,11 +27,18 @@ function Notes() {
 		});
 	};
 
+	const handleNoteArchive = async (e, note) => {
+		e.preventDefault();
+		const { notes, archives } = await addToArchives(note, user.token);
+		dispatch({ type: ARCHIVE_NOTE, payload: { notes, archives } });
+	};
+
 	const handleNoteDelete = async (e, noteId) => {
 		e.preventDefault();
 		const { notes, trash } = await addToTrash(noteId, user.token);
 		dispatch({ type: TRASH_NOTE, payload: { notes, trash } });
 	};
+
 	return (
 		<>
 			{notes.map((note) => (
@@ -44,7 +53,7 @@ function Notes() {
 								className="text-white text-lg"
 							/>
 						</button>
-						<button>
+						<button onClick={(e) => handleNoteArchive(e, note)}>
 							<FontAwesomeIcon
 								icon={faArchive}
 								className="text-white text-lg"
