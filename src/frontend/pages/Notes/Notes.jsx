@@ -7,12 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoteCard from "../../components/NoteCard/NoteCard";
 import NoteUpdateModal from "../../components/NoteUpdateModal/NoteUpdateModal";
 import {
-	NOTES,
 	OPEN_NOTE_UPDATE_MODAL,
+	TRASH_NOTE,
 } from "../../constants/reducer-constants";
 import { useAuth } from "../../context/auth-context";
 import { useNotes } from "../../context/notes-context";
-import { deleteNotePermanent } from "../../services/notes-service";
+import { addToTrash } from "../../services/notes-trash-service";
 
 function Notes() {
 	const { user } = useAuth();
@@ -27,8 +27,8 @@ function Notes() {
 
 	const handleNoteDelete = async (e, noteId) => {
 		e.preventDefault();
-		const resp = await deleteNotePermanent(noteId, user.token);
-		dispatch({ type: NOTES, payload: { notes: resp } });
+		const { notes, trash } = await addToTrash(noteId, user.token);
+		dispatch({ type: TRASH_NOTE, payload: { notes, trash } });
 	};
 	return (
 		<>

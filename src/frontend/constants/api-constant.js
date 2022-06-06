@@ -11,5 +11,6 @@ export const API_DELETE_ARCHIVES = "/api/archives/delete";
 
 // Trash endpoints
 export const API_GET_TRASH = "/api/trash";
+export const API_POST_TRASH = "/api/notes/trash";
 export const API_RESTORE_TRASH = "/api/trash/restore";
 export const API_DELETE_TRASH = "/api/trash/delete";
