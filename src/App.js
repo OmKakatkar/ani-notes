@@ -7,20 +7,23 @@ import SignUp from "./frontend/pages/Auth/SignUp/SignUp";
 import MockAPI from "./frontend/mock/MockAPI";
 import UserProfile from "./frontend/pages/UserProfile/UserProfile";
 import { ToastContainer } from "react-toastify";
+import NewNote from "./frontend/pages/NewNote/NewNote";
+import Notes from "./frontend/pages/Notes/Notes";
 
 function App() {
 	return (
 		<div className="app">
 			<Routes>
 				<Route
-					path="/"
 					element={
 						<PrivateRoute>
 							<Layout />
 						</PrivateRoute>
 					}
 				>
+					<Route path="/" element={<Notes />} />
 					<Route path="/profile" element={<UserProfile />} />
+					<Route path="/new-note" element={<NewNote />} />
 				</Route>
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<SignUp />} />
