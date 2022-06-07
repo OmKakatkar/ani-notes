@@ -1,10 +1,14 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import {
 	ARCHIVES,
+	ARCHIVE_NOTE,
 	CLOSE_NOTE_UPDATE_MODAL,
 	NOTES,
 	OPEN_NOTE_UPDATE_MODAL,
+	RESTORE_NOTE,
 	TRASH,
+	TRASH_NOTE,
+	UNARCHIVE_NOTE,
 	UPDATE_NOTE,
 } from "../constants/reducer-constants";
 import { useAuth } from "./auth-context";
@@ -37,8 +41,22 @@ const reducer = (state, action) => {
 			};
 		case NOTES:
 			return { ...state, notes: [...action.payload.notes] };
+		case ARCHIVE_NOTE:
+		case UNARCHIVE_NOTE:
+			return {
+				...state,
+				notes: [...action.payload.notes],
+				archives: [...action.payload.archives],
+			};
 		case ARCHIVES:
 			return { ...state, archives: [...action.payload.archives] };
+		case RESTORE_NOTE:
+		case TRASH_NOTE:
+			return {
+				...state,
+				notes: [...action.payload.notes],
+				trash: [...action.payload.trash],
+			};
 		case TRASH:
 			return { ...state, trash: [...action.payload.trash] };
 		default:
