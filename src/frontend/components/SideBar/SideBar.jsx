@@ -2,6 +2,7 @@ import {
 	faHome,
 	faArchive,
 	faTrashAlt,
+	faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
@@ -25,7 +26,7 @@ function SideBar() {
 							<>
 								<li className="sidebar-list-item">
 									<NavLink
-										to="/history"
+										to="/archived"
 										className="sidebar-item-link text-white"
 									>
 										<FontAwesomeIcon icon={faArchive} className="text-lg" />
@@ -33,9 +34,18 @@ function SideBar() {
 									</NavLink>
 								</li>
 								<li className="sidebar-list-item">
-									<NavLink to="/likes" className="sidebar-item-link text-white">
+									<NavLink to="/bin" className="sidebar-item-link text-white">
 										<FontAwesomeIcon icon={faTrashAlt} className="text-lg" />
 										<span>Bin</span>
+									</NavLink>
+								</li>
+								<li className="sidebar-list-item">
+									<NavLink
+										to="/new-note"
+										className="sidebar-item-link text-white"
+									>
+										<FontAwesomeIcon icon={faStickyNote} className="text-lg" />
+										<span>Create New</span>
 									</NavLink>
 								</li>
 							</>

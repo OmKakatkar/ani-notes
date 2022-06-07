@@ -1,0 +1,7 @@
+.input-container {
+	min-width: 30rem;
+}
+
+.ql-editor.ql-blank::before {
+	color: var(--white);
+}
