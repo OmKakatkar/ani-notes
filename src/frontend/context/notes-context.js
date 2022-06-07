@@ -3,6 +3,8 @@ import {
 	ARCHIVES,
 	ARCHIVE_NOTE,
 	CLOSE_NOTE_UPDATE_MODAL,
+	FILTER_PRIORITY,
+	FILTER_TAG,
 	NOTES,
 	OPEN_NOTE_UPDATE_MODAL,
 	RESTORE_NOTE,
@@ -15,12 +17,24 @@ import { useAuth } from "./auth-context";
 
 const NotesContext = createContext();
 
+const addTag = (tagArray, tag) => {
+	return [...tagArray, tag];
+};
+
+const removeTag = (tagArray, tag) => {
+	return tagArray.filter((currTag) => currTag !== tag);
+};
+
 const intialData = {
 	showNoteUpdateModal: false,
 	currentNote: {},
 	notes: [],
 	archives: [],
 	trash: [],
+	filters: {
+		priority: "",
+		tags: [],
+	},
 };
 
 const reducer = (state, action) => {
@@ -59,6 +73,31 @@ const reducer = (state, action) => {
 			};
 		case TRASH:
 			return { ...state, trash: [...action.payload.trash] };
+		case FILTER_PRIORITY:
+			return {
+				...state,
+				filters: {
+					...state.filters,
+					priority: action.payload.filters.priority,
+				},
+			};
+		case FILTER_TAG:
+			if (state.filters.tags.includes(action.payload)) {
+				return {
+					...state,
+					filters: {
+						...state.filters,
+						tags: removeTag(state.filters.tags, action.payload),
+					},
+				};
+			}
+			return {
+				...state,
+				filters: {
+					...state.filters,
+					tags: addTag(state.filters.tags, action.payload),
+				},
+			};
 		default:
 			return state;
 	}
@@ -67,7 +106,8 @@ const reducer = (state, action) => {
 const NotesProvider = ({ children }) => {
 	const { user } = useAuth();
 	const [state, dispatch] = useReducer(reducer, intialData);
-	const { notes, archives, trash, showNoteUpdateModal, currentNote } = state;
+	const { notes, archives, trash, showNoteUpdateModal, currentNote, filters } =
+		state;
 
 	useEffect(() => {
 		if (user.token) {
@@ -84,6 +124,7 @@ const NotesProvider = ({ children }) => {
 		trash,
 		showNoteUpdateModal,
 		currentNote,
+		filters,
 	};
 	return (
 		<NotesContext.Provider value={providerData}>

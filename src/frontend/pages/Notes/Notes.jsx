@@ -15,10 +15,13 @@ import { useAuth } from "../../context/auth-context";
 import { useNotes } from "../../context/notes-context";
 import { addToArchives } from "../../services/notes-archive-service";
 import { addToTrash } from "../../services/notes-trash-service";
+import { getFilteredNotes } from "../../utils/filter-utils";
 
 function Notes() {
 	const { user } = useAuth();
-	const { notes, showNoteUpdateModal, dispatch } = useNotes();
+	const { notes, showNoteUpdateModal, filters, dispatch } = useNotes();
+
+	const filteredNotes = getFilteredNotes(notes, filters);
 
 	const handleNoteUpdate = (note) => {
 		dispatch({
@@ -41,7 +44,7 @@ function Notes() {
 
 	return (
 		<>
-			{notes.map((note) => (
+			{filteredNotes.map((note) => (
 				<NoteCard key={note._id} note={note}>
 					<div className="button-container">
 						<button onClick={() => handleNoteUpdate(note)}>
