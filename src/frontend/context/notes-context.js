@@ -3,11 +3,14 @@ import {
 	ARCHIVES,
 	ARCHIVE_NOTE,
 	CLOSE_NOTE_UPDATE_MODAL,
+	DATE_LATEST,
 	FILTER_PRIORITY,
 	FILTER_TAG,
 	NOTES,
 	OPEN_NOTE_UPDATE_MODAL,
+	PRIORITY_NONE,
 	RESTORE_NOTE,
+	SORT_DATE,
 	TRASH,
 	TRASH_NOTE,
 	UNARCHIVE_NOTE,
@@ -32,8 +35,9 @@ const intialData = {
 	archives: [],
 	trash: [],
 	filters: {
-		priority: "",
+		priority: PRIORITY_NONE,
 		tags: [],
+		dateTime: DATE_LATEST,
 	},
 };
 
@@ -96,6 +100,14 @@ const reducer = (state, action) => {
 				filters: {
 					...state.filters,
 					tags: addTag(state.filters.tags, action.payload),
+				},
+			};
+		case SORT_DATE:
+			return {
+				...state,
+				filters: {
+					...state.filters,
+					dateTime: action.payload,
 				},
 			};
 		default:

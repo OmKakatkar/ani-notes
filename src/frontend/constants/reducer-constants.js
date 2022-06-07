@@ -17,3 +17,7 @@ export const SORT_DATE = "SORT_DATE";
 export const PRIORITY_HIGH = "PRIORITY_HIGH";
 export const PRIORITY_MEDIUM = "PRIORITY_MEDIUM";
 export const PRIORITY_LOW = "PRIORITY_LOW";
+export const PRIORITY_NONE = "PRIORITY_NONE";
+
+export const DATE_LATEST = "DATE_LATEST";
+export const DATE_OLDEST = "DATE_OLDEST";
