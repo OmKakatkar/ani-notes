@@ -34,9 +34,9 @@ const filterByTag = (notes, filterTags) => {
 const sortByDate = (notes, dateTime) => {
 	switch (dateTime) {
 		case DATE_OLDEST:
-			return [...notes.sort((a, b) => a.createdAt - b.createdAt)];
+			return [...notes].sort((a, b) => a.createdAt - b.createdAt);
 		case DATE_LATEST:
-			return [...notes.sort((a, b) => b.createdAt - a.createdAt)];
+			return [...notes].sort((a, b) => b.createdAt - a.createdAt);
 		default:
 			return notes;
 	}
