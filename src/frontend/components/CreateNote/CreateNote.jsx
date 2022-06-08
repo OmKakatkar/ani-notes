@@ -21,7 +21,10 @@ function CreateNote() {
 	});
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const resp = await createNote(noteData, user.token);
+		const resp = await createNote(
+			{ ...noteData, createdAt: Date.now() },
+			user.token
+		);
 		dispatch({ type: NOTES, payload: { notes: resp } });
 		navigate("/");
 	};
@@ -29,6 +32,7 @@ function CreateNote() {
 	const handleChange = (e) => {
 		setNoteData({ ...noteData, [e.target.name]: e.target.value });
 	};
+
 	return (
 		<div className="text-white">
 			<form onSubmit={handleSubmit}>

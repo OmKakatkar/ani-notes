@@ -11,7 +11,8 @@
 .modal-body {
 	background-color: var(--clr-secondary-background);
 	border-radius: 1rem;
-	max-height: 50vh;
-	width: 20vw;
+	max-height: max-content;
+	width: max-content;
 	position: relative;
+	padding: 4rem;
 }

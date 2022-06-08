@@ -11,15 +11,17 @@ import { RichTextEditor } from "../RichTextEditor/RichTextEditor";
 function NoteUpdateModal() {
 	const { user } = useAuth();
 	const { dispatch, currentNote } = useNotes();
-	const { title, description, noteColor, priority, tags, _id } = currentNote;
+	const { title, description, noteColor, priority, tags, _id, createdAt } =
+		currentNote;
 
 	const [noteData, setNoteData] = useState({
-		title: title,
-		description: description,
-		noteColor: noteColor,
-		priority: priority,
-		tags: tags,
-		_id: _id,
+		title,
+		description,
+		noteColor,
+		priority,
+		tags,
+		createdAt,
+		_id,
 	});
 
 	const closeModal = (e) => {

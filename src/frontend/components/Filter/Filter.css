@@ -1,0 +1,8 @@
+.filter-type-container,
+.filter-list {
+	margin-top: 0.5rem;
+}
+
+.filter-type-container {
+	padding: var(--padding-1r);
+}

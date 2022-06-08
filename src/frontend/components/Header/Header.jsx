@@ -1,8 +1,17 @@
-import { faBars, faBook, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+	faBars,
+	faBook,
+	faSearch,
+	faSliders,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
+import useDetectClickOutside from "../../hooks/useDetectClickOutside";
+import Filter from "../Filter/Filter";
+import ModalCard from "../ModalCard/ModalCard";
 import "./Header.css";
 function Header() {
+	const { triggerRef, nodeRef, showItem } = useDetectClickOutside(false);
 	return (
 		<header className="header flex">
 			<div className="flex">
@@ -17,6 +26,16 @@ function Header() {
 				<button className="btn">
 					<FontAwesomeIcon icon={faSearch} className="text-white text-lg" />
 				</button>
+				<div>
+					<button className="btn" ref={triggerRef}>
+						<FontAwesomeIcon icon={faSliders} className="text-white text-lg" />
+					</button>
+					{showItem && (
+						<ModalCard ref={nodeRef}>
+							<Filter />
+						</ModalCard>
+					)}
+				</div>
 			</div>
 			<NavLink to="/profile">
 				<div className="avatar flex-container">
