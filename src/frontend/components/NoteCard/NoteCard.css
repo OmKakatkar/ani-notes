@@ -1,0 +1,7 @@
+.button-container {
+	padding: var(--padding-1r);
+	display: flex;
+	justify-content: space-evenly;
+	width: 50%;
+	margin-right: auto;
+}
