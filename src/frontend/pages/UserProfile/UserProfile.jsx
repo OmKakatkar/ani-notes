@@ -1,25 +1,19 @@
-import { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth-context";
-import { getUserDetails } from "../../services/auth-service";
 
 import "./UserProfile.css";
 
 function UserProfile() {
-	const { user, handleLogout } = useAuth();
-	const [userData, setUserData] = useState();
-	useEffect(() => {
-		(async () => {
-			const resp = await getUserDetails(user.token);
-			setUserData(resp);
-		})();
-	}, [user.token]);
+	const { user: currentUser, handleLogout } = useAuth();
+	const { user } = currentUser;
+	console.log(user)
+
 	return (
 		<div className="text-white">
-			{userData && (
+			{currentUser.token && (
 				<div className="profile-wrapper text-xlg">
-					<div>First Name: {userData.firstName}</div>
-					<div>Last Name: {userData.lastName}</div>
-					<div>Email: {userData.email}</div>
+					<div>First Name: {user.firstName}</div>
+					<div>Last Name: {user.lastName}</div>
+					<div>Email: {user.email}</div>
 					<button
 						className="btn bg-red rounded"
 						onClick={() => {
