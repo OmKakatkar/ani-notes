@@ -7,13 +7,14 @@ function NoteCard({ note, children }) {
 			style={{ backgroundColor: note.noteColor }}
 		>
 			<div className="card-body">
-				{note.tags.length > 0 && <span className="tag">{note.tags[0]}</span>}
+				{note.tags.length > 0 && <span className="tag">{note.tags[0]}</span>}{" "}
+				{<span className="tag">{note.priority}</span>}
 				<h3 className="text-huge">{note.title}</h3>
 				<p
 					className="text-sm"
 					dangerouslySetInnerHTML={{ __html: note.description }}
 				/>
-				<span>{new Date(note.createdAt).toLocaleString()}</span>
+				<span>{new Date(note.updatedAt).toLocaleString()}</span>
 			</div>
 			{children}
 		</article>

@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import {
 	DATE_LATEST,
 	DATE_OLDEST,
@@ -34,9 +35,9 @@ const filterByTag = (notes, filterTags) => {
 const sortByDate = (notes, dateTime) => {
 	switch (dateTime) {
 		case DATE_OLDEST:
-			return [...notes].sort((a, b) => a.createdAt - b.createdAt);
+			return [...notes].sort((a, b) => dayjs(a.updatedAt) - dayjs(b.updatedAt));
 		case DATE_LATEST:
-			return [...notes].sort((a, b) => b.createdAt - a.createdAt);
+			return [...notes].sort((a, b) => dayjs(b.updatedAt) - dayjs(a.updatedAt));
 		default:
 			return notes;
 	}

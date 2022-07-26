@@ -6,6 +6,7 @@ import { useAuth } from "../../context/auth-context";
 import { useNotes } from "../../context/notes-context";
 import { NOTES } from "../../constants/reducer-constants";
 import { RichTextEditor } from "../RichTextEditor/RichTextEditor";
+import { formatDate } from "../../../backend/utils/authUtils";
 
 function CreateNote() {
 	const { user } = useAuth();
@@ -22,7 +23,7 @@ function CreateNote() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const resp = await createNote(
-			{ ...noteData, createdAt: Date.now() },
+			{ ...noteData, createdAt: formatDate(), updatedAt: formatDate() },
 			user.token
 		);
 		dispatch({ type: NOTES, payload: { notes: resp } });

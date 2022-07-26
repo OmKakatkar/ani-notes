@@ -7,6 +7,7 @@ import Input from "../Input/Input";
 import { updateNote } from "../../services/notes-service";
 import { UPDATE_NOTE } from "../../constants/reducer-constants";
 import { RichTextEditor } from "../RichTextEditor/RichTextEditor";
+import { formatDate } from "../../../backend/utils/authUtils";
 
 function NoteUpdateModal() {
 	const { user } = useAuth();
@@ -32,7 +33,7 @@ function NoteUpdateModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const resp = await updateNote(noteData, user.token);
+		const resp = await updateNote({...noteData, updatedAt: formatDate()}, user.token);
 		dispatch({ type: UPDATE_NOTE, payload: { notes: resp } });
 	};
 
