@@ -3,6 +3,7 @@ import {
 	faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSearchParams } from "react-router-dom";
 import NoteCard from "../../components/NoteCard/NoteCard";
 import { TRASH_NOTE, UNARCHIVE_NOTE } from "../../constants/reducer-constants";
 import { success } from "../../constants/toast-constants";
@@ -10,11 +11,15 @@ import { useAuth } from "../../context/auth-context";
 import { useNotes } from "../../context/notes-context";
 import { restoreFromArchives } from "../../services/notes-archive-service";
 import { addToTrash } from "../../services/notes-trash-service";
+import { getFilteredNotes } from "../../utils/filter-utils";
 import { notify } from "../../utils/notify";
 
 function Archives() {
 	const { user } = useAuth();
-	const { archives, dispatch } = useNotes();
+	const { archives, dispatch, filters } = useNotes();
+	const [searchParams] = useSearchParams();
+	const search = searchParams.get("search");
+	const filteredNotes = getFilteredNotes(archives, { ...filters, search });
 
 	const handleNoteDelete = async (e, noteId) => {
 		e.preventDefault();
@@ -36,25 +41,31 @@ function Archives() {
 
 	return (
 		<>
-			{archives.map((note) => (
-				<NoteCard key={note._id} note={note}>
-					<div className="button-container">
-						<button onClick={(e) => handleNoteDelete(e, note._id)}>
-							<FontAwesomeIcon
-								icon={faTrashAlt}
-								className="text-white text-lg"
-							/>
-						</button>
+			{filteredNotes.length > 0 ? (
+				filteredNotes.map((note) => (
+					<NoteCard key={note._id} note={note}>
+						<div className="button-container">
+							<button onClick={(e) => handleNoteDelete(e, note._id)}>
+								<FontAwesomeIcon
+									icon={faTrashAlt}
+									className="text-white text-lg"
+								/>
+							</button>
 
-						<button onClick={(e) => handleNoteUnarchive(e, note._id)}>
-							<FontAwesomeIcon
-								icon={faArrowAltCircleUp}
-								className="text-white text-lg"
-							/>
-						</button>
-					</div>
-				</NoteCard>
-			))}
+							<button onClick={(e) => handleNoteUnarchive(e, note._id)}>
+								<FontAwesomeIcon
+									icon={faArrowAltCircleUp}
+									className="text-white text-lg"
+								/>
+							</button>
+						</div>
+					</NoteCard>
+				))
+			) : (
+				<h1 className="text-xhuge text-white text-center mg-top-2r">
+					No Notes Found
+				</h1>
+			)}
 		</>
 	);
 }

@@ -43,8 +43,18 @@ const sortByDate = (notes, dateTime) => {
 	}
 };
 
+const searchNotes = (notes, search) => {
+	if (search) {
+		return notes.filter(({ title }) =>
+			title.toLowerCase().includes(search.toLowerCase())
+		);
+	}
+	return notes;
+};
+
 export const getFilteredNotes = (notes, filters) => {
-	const priorityFiltered = filterByPriority(notes, filters.priority);
+	const searchedNotes = searchNotes(notes, filters.search);
+	const priorityFiltered = filterByPriority(searchedNotes, filters.priority);
 	const tagFiltered = filterByTag(priorityFiltered, filters.tags);
 	const dateSorted = sortByDate(tagFiltered, filters.dateTime);
 	return dateSorted;

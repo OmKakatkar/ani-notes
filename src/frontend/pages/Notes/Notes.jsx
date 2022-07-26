@@ -4,6 +4,7 @@ import {
 	faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSearchParams } from "react-router-dom";
 import NoteCard from "../../components/NoteCard/NoteCard";
 import NoteUpdateModal from "../../components/NoteUpdateModal/NoteUpdateModal";
 import {
@@ -20,8 +21,9 @@ import { getFilteredNotes } from "../../utils/filter-utils";
 function Notes() {
 	const { user } = useAuth();
 	const { notes, showNoteUpdateModal, filters, dispatch } = useNotes();
-
-	const filteredNotes = getFilteredNotes(notes, filters);
+	const [searchParams] = useSearchParams();
+	const search = searchParams.get("search");
+	const filteredNotes = getFilteredNotes(notes, { ...filters, search });
 
 	const handleNoteUpdate = (note) => {
 		dispatch({
@@ -44,7 +46,7 @@ function Notes() {
 
 	return (
 		<>
-			{filteredNotes.map((note) => (
+			{filteredNotes.length > 0 ? filteredNotes.map((note) => (
 				<NoteCard key={note._id} note={note}>
 					<div className="button-container">
 						<button onClick={() => handleNoteUpdate(note)}>
@@ -64,7 +66,7 @@ function Notes() {
 						</button>
 					</div>
 				</NoteCard>
-			))}
+			)) : <h1 className="text-xhuge text-white text-center mg-top-2r">No Notes Found</h1>}
 			{showNoteUpdateModal && <NoteUpdateModal />}
 		</>
 	);
