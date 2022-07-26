@@ -22,6 +22,7 @@ import {
   getAllTrashNotesHandler,
   restoreFromTrashHandler,
 } from "./backend/controllers/TrashController";
+import { notes } from "./backend/db/notes";
 import { users } from "./backend/db/users";
 
 export function makeServer({ environment = "development" } = {}) {
@@ -41,7 +42,7 @@ export function makeServer({ environment = "development" } = {}) {
       users.forEach((item) =>
         server.create("user", {
           ...item,
-          notes: [],
+          notes,
           archives: [],
           trash: [],
         })
