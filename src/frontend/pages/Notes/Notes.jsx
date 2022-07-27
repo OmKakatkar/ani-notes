@@ -52,7 +52,6 @@ function Notes() {
 		dispatch({ type: TRASH_NOTE, payload: { notes, trash } });
 		dispatch({ type: TOGGLE_LOADING });
 	};
-	console.log(isLoading);
 
 	return (
 		<>

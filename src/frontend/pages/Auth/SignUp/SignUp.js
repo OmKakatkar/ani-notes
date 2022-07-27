@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Input from "../../../components/Input/Input";
 import { SIGNUP_DB } from "../../../constants/signup-form-data";
@@ -18,12 +18,10 @@ function SignUp() {
 	const { handleSignUp } = useAuth();
 	const [signUpData, setSignUpData] = useState(initialSignUpData);
 	const [acceptTnC, setAcceptTnC] = useState(false);
-	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await handleSignUp(signUpData);
-		navigate("/");
 	};
 
 	const handleChange = (e) => {
@@ -35,16 +33,17 @@ function SignUp() {
 	};
 
 	return (
-		<main className="flex-container">
+		<main className="flex-container auth-container">
 			<div className="form-container">
 				<form className="flex-container flex-column" onSubmit={handleSubmit}>
 					<h1 className="text-xhuge form-heading">Sign Up</h1>
-					{SIGNUP_DB.map(({ id, type, label, name }) => (
+					{SIGNUP_DB.map(({ id, type, label, name, autoComplete }) => (
 						<Input
 							key={id}
 							type={type}
 							label={label}
 							name={name}
+							autoComplete={autoComplete}
 							value={signUpData[name]}
 							handleChange={handleChange}
 						/>
@@ -84,7 +83,7 @@ function SignUp() {
 					className="btn rounded bd-blue"
 					onClick={handleGuestSignUp}
 				>
-					Guest Login
+					Guest Credentials
 				</button>
 				<div className="text-center">
 					<Link to="/login" className="form-link">

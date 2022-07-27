@@ -2,6 +2,7 @@ function Input({
 	type,
 	label,
 	name,
+	autoComplete,
 	value,
 	handleChange,
 	classNames,
@@ -13,6 +14,7 @@ function Input({
 			<input
 				type={type}
 				name={name}
+				autoComplete={autoComplete}
 				className={`input text-md ${classNames}`}
 				value={value}
 				onChange={handleChange}

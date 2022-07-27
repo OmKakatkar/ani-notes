@@ -9,15 +9,17 @@ const AuthProvider = ({ children }) => {
 	const initialUser = JSON.parse(localStorage.getItem(currentUser)) || {};
 	const [user, setUser] = useState(initialUser);
 
-	const handleLogin = async ({ email, password }) => {
+	const handleLogin = async ({ email, password }, isLoginRemember) => {
 		try {
 			const { foundUser: user, encodedToken: token } = await login({
 				email,
 				password,
 			});
-			if (token) {
+			if (token && isLoginRemember) {
 				localStorage.setItem(currentUser, JSON.stringify({ user, token }));
 				setUser(JSON.parse(localStorage.getItem(currentUser)));
+			} else if (token) {
+				setUser({ user, token });
 			}
 		} catch (err) {
 			console.error(err);

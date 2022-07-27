@@ -1,14 +1,16 @@
 export const LOGIN_DB = [
 	{
 		id: 1,
-		type: 'text',
-		label: 'Email',
-		name: 'email'
+		type: "email",
+		label: "Email",
+		name: "email",
+		autoComplete: "current-username",
 	},
 	{
 		id: 2,
-		type: 'password',
-		label: 'Password',
-		name: 'password'
-	}
+		type: "password",
+		label: "Password",
+		name: "password",
+		autoComplete: "current-password",
+	},
 ];

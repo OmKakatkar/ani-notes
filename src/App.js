@@ -11,6 +11,7 @@ import NewNote from "./frontend/pages/NewNote/NewNote";
 import Archives from "./frontend/pages/Archives/Archives";
 import Trash from "./frontend/pages/Trash/Trash";
 import Notes from "./frontend/pages/Notes/Notes";
+import Auth from "./frontend/components/PrivateRoute/Auth/Auth";
 
 function App() {
 	return (
@@ -29,8 +30,10 @@ function App() {
 					<Route path="/archived" element={<Archives />} />
 					<Route path="/bin" element={<Trash />} />
 				</Route>
-				<Route path="login" element={<Login />} />
-				<Route path="signup" element={<SignUp />} />
+				<Route element={<Auth />}>
+					<Route path="login" element={<Login />} />
+					<Route path="signup" element={<SignUp />} />
+				</Route>
 				<Route path="mock" element={<MockAPI />} />
 				<Route path="*" />
 			</Routes>

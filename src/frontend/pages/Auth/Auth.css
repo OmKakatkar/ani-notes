@@ -1,3 +1,7 @@
+.auth-container {
+	height: 100vh;
+}
+
 .form-container {
 	min-width: 40rem;
 	padding: 5rem;
