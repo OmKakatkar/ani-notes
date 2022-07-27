@@ -51,7 +51,7 @@ function Archives() {
 
 	return (
 		<>
-			<h1 className="text-white text-center text-xhuge pad-top-1r">Notes</h1>
+			<h1 className="text-white text-center text-xhuge pad-top-1r">Archives</h1>
 			{filteredNotes.length > 0 ? (
 				<Masonry
 					breakpointCols={breakPoints}
@@ -85,9 +85,9 @@ function Archives() {
 					))}
 				</Masonry>
 			) : (
-				<h1 className="text-xhuge text-white text-center mg-top-2r">
-					No Notes Found
-				</h1>
+				<p className="text-huge text-white text-center mg-top-2r">
+					Archived Notes will be displayed here
+				</p>
 			)}
 		</>
 	);

@@ -38,18 +38,20 @@ function Header() {
 			</div>
 			{searchRoutes.includes(location.pathname) && (
 				<div className="header-searchbar-wrapper">
-					<label aria-label="search" htmlFor="search" />
-					<input
-						type="search"
-						name="search"
-						className="header-searchbar text-white"
-						placeholder="Search Notes..."
-						value={searchQuery}
-						onChange={(e) => setSearchQuery(e.target.value)}
-					/>
-					<button className="btn" onClick={handleSearch}>
-						<FontAwesomeIcon icon={faSearch} className="text-white text-lg" />
-					</button>
+					<form className="search-form" onSubmit={handleSearch}>
+						<label aria-label="search" htmlFor="search" />
+						<input
+							type="search"
+							name="search"
+							className="header-searchbar text-white"
+							placeholder="Search Notes..."
+							value={searchQuery}
+							onChange={(e) => setSearchQuery(e.target.value)}
+						/>
+						<button className="btn">
+							<FontAwesomeIcon icon={faSearch} className="text-white text-lg" />
+						</button>
+					</form>
 					<div>
 						<button className="btn" ref={triggerRef}>
 							<FontAwesomeIcon

@@ -46,7 +46,7 @@ const sortByDate = (notes, dateTime) => {
 const searchNotes = (notes, search) => {
 	if (search) {
 		return notes.filter(({ title }) =>
-			title.toLowerCase().includes(search.toLowerCase())
+			title.toString().toLowerCase().includes(search.toString().toLowerCase())
 		);
 	}
 	return notes;

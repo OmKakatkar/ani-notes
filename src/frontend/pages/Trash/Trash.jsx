@@ -42,7 +42,7 @@ function Trash() {
 
 	return (
 		<>
-			<h1 className="text-white text-center text-xhuge pad-top-1r">Notes</h1>
+			<h1 className="text-white text-center text-xhuge pad-top-1r">Trash</h1>
 			{filteredNotes.length > 0 ? (
 				<Masonry
 					breakpointCols={breakPoints}
@@ -76,9 +76,9 @@ function Trash() {
 					))}
 				</Masonry>
 			) : (
-				<h1 className="text-xhuge text-white text-center mg-top-2r">
-					No Notes Found
-				</h1>
+				<p className="text-huge text-white text-center mg-top-2r">
+					Trash is empty
+				</p>
 			)}
 		</>
 	);
