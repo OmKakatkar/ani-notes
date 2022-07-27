@@ -43,7 +43,7 @@ function SideBar() {
 										<span>Bin</span>
 									</NavLink>
 								</li>
-								{location.pathname !== "/profile" && (
+								{location.pathname === "/" && (
 									<button
 										className="sidebar-item-link text-white bg-blue"
 										onClick={() => dispatch({ type: OPEN_NOTE_CREATE_MODAL })}

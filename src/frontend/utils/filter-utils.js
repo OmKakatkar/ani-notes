@@ -2,10 +2,10 @@ import dayjs from "dayjs";
 import {
 	DATE_LATEST,
 	DATE_OLDEST,
+	PRIORITY_ALL,
 	PRIORITY_HIGH,
 	PRIORITY_LOW,
 	PRIORITY_MEDIUM,
-	PRIORITY_NONE,
 } from "../constants/reducer-constants";
 
 const filterByPriority = (notes, priority) => {
@@ -16,7 +16,7 @@ const filterByPriority = (notes, priority) => {
 			return notes.filter((note) => note.priority === "medium");
 		case PRIORITY_LOW:
 			return notes.filter((note) => note.priority === "low");
-		case PRIORITY_NONE:
+		case PRIORITY_ALL:
 			return notes;
 		default:
 			return notes;

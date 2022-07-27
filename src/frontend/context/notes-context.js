@@ -3,13 +3,12 @@ import {
 	ARCHIVES,
 	ARCHIVE_NOTE,
 	CLOSE_NOTE_UPDATE_MODAL,
-	DATE_LATEST,
 	FILTER_PRIORITY,
 	FILTER_TAG,
 	NOTES,
 	OPEN_NOTE_CREATE_MODAL,
 	OPEN_NOTE_UPDATE_MODAL,
-	PRIORITY_NONE,
+	PRIORITY_ALL,
 	RESTORE_NOTE,
 	SORT_DATE,
 	TOGGLE_LOADING,
@@ -48,9 +47,9 @@ const intialData = {
 	archives: [],
 	trash: [],
 	filters: {
-		priority: PRIORITY_NONE,
+		priority: PRIORITY_ALL,
 		tags: [],
-		dateTime: DATE_LATEST,
+		dateTime: "",
 	},
 };
 

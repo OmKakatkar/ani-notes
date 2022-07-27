@@ -6,7 +6,7 @@ import {
 	PRIORITY_HIGH,
 	PRIORITY_LOW,
 	PRIORITY_MEDIUM,
-	PRIORITY_NONE,
+	PRIORITY_ALL,
 	SORT_DATE,
 } from "../../constants/reducer-constants";
 import { useNotes } from "../../context/notes-context";
@@ -85,12 +85,12 @@ function Filter() {
 								onChange={() => {
 									dispatch({
 										type: FILTER_PRIORITY,
-										payload: { filters: { priority: PRIORITY_NONE } },
+										payload: { filters: { priority: PRIORITY_ALL } },
 									});
 								}}
-								checked={priority && priority === PRIORITY_NONE}
+								checked={priority && priority === PRIORITY_ALL}
 							/>
-							<div className="radio-icon"></div>None
+							<div className="radio-icon"></div>All
 						</label>
 					</li>
 				</ul>
