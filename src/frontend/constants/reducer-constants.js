@@ -21,3 +21,5 @@ export const PRIORITY_NONE = "PRIORITY_NONE";
 
 export const DATE_LATEST = "DATE_LATEST";
 export const DATE_OLDEST = "DATE_OLDEST";
+
+export const TOGGLE_LOADING = "TOGGLE_LOADING";

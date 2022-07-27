@@ -1,8 +1,14 @@
 import { faTrashAlt, faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {useSearchParams} from 'react-router-dom'
+import Masonry from "react-masonry-css";
+import { useSearchParams } from "react-router-dom";
 import NoteCard from "../../components/NoteCard/NoteCard";
-import { RESTORE_NOTE, TRASH } from "../../constants/reducer-constants";
+import { breakPoints } from "../../constants/masonry-constant";
+import {
+	RESTORE_NOTE,
+	TOGGLE_LOADING,
+	TRASH,
+} from "../../constants/reducer-constants";
 import { useAuth } from "../../context/auth-context";
 import { useNotes } from "../../context/notes-context";
 import {
@@ -13,48 +19,65 @@ import { getFilteredNotes } from "../../utils/filter-utils";
 
 function Trash() {
 	const { user } = useAuth();
-	const { trash, dispatch, filters } = useNotes();
+	const { trash, dispatch, filters, isLoading } = useNotes();
 	const [searchParams] = useSearchParams();
 	const search = searchParams.get("search");
 	const filteredNotes = getFilteredNotes(trash, { ...filters, search });
 
 	const handleNoteDelete = async (e, noteId) => {
 		e.preventDefault();
+		dispatch({ type: TOGGLE_LOADING });
 		const { trash } = await deleteFromTrash(noteId, user.token);
 		dispatch({ type: TRASH, payload: { trash } });
+		dispatch({ type: TOGGLE_LOADING });
 	};
 
 	const handleNoteRestore = async (e, noteId) => {
 		e.preventDefault();
+		dispatch({ type: TOGGLE_LOADING });
 		const { notes, trash } = await restoreFromTrash(noteId, user.token);
 		dispatch({ type: RESTORE_NOTE, payload: { notes, trash } });
+		dispatch({ type: TOGGLE_LOADING });
 	};
 
 	return (
 		<>
+			<h1 className="text-white text-center text-xhuge pad-top-1r">Notes</h1>
 			{filteredNotes.length > 0 ? (
-				filteredNotes.map((note) => (
-					<NoteCard key={note._id} note={note}>
-						<div className="button-container">
-							<button onClick={(e) => handleNoteDelete(e, note._id)}>
-								<FontAwesomeIcon
-									icon={faTrashAlt}
-									className="text-white text-lg"
-								/>
-							</button>
+				<Masonry
+					breakpointCols={breakPoints}
+					className="my-masonry-grid"
+					columnClassName="my-masonry-grid_column"
+				>
+					{filteredNotes.map((note) => (
+						<NoteCard key={note._id} note={note}>
+							<div className="button-container">
+								<button
+									onClick={(e) => handleNoteDelete(e, note._id)}
+									disabled={isLoading}
+								>
+									<FontAwesomeIcon
+										icon={faTrashAlt}
+										className="text-white text-lg"
+									/>
+								</button>
 
-							<button onClick={(e) => handleNoteRestore(e, note._id)}>
-								<FontAwesomeIcon
-									icon={faTrashRestore}
-									className="text-white text-lg"
-								/>
-							</button>
-						</div>
-					</NoteCard>
-				))
+								<button
+									onClick={(e) => handleNoteRestore(e, note._id)}
+									disabled={isLoading}
+								>
+									<FontAwesomeIcon
+										icon={faTrashRestore}
+										className="text-white text-lg"
+									/>
+								</button>
+							</div>
+						</NoteCard>
+					))}
+				</Masonry>
 			) : (
 				<h1 className="text-xhuge text-white text-center mg-top-2r">
-					Trash is Empty
+					No Notes Found
 				</h1>
 			)}
 		</>

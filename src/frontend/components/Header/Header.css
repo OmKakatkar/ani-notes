@@ -47,22 +47,22 @@
 
 .header-searchbar {
 	background-color: var(--clr-primary-background);
-	border: 2px solid  var(--clr-primary-background-lighter);
+	border: 2px solid var(--clr-primary-background-lighter);
 	padding: var(--padding-1r);
 	flex: 1;
 }
 
-.header-searchbar:focus-visible, 
+.header-searchbar:focus-visible,
 .header-searchbar:active {
-  outline: none;
-  border-color: var(--primary-blue);
+	outline: none;
+	border-color: var(--primary-blue);
 }
 
 /* Remove the cross icon in searchbar */
-input[type='search']::-webkit-search-decoration,
-input[type='search']::-webkit-search-cancel-button,
-input[type='search']::-webkit-search-results-button,
-input[type='search']::-webkit-search-results-decoration {
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
 	-webkit-appearance: none;
 }
 
@@ -70,4 +70,8 @@ input[type='search']::-webkit-search-results-decoration {
 	margin-left: 1rem;
 	background-color: var(--clr-brand-primary);
 	border-radius: 50%;
+}
+
+a.active {
+	background-color: transparent;
 }

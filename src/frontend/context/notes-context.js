@@ -11,6 +11,7 @@ import {
 	PRIORITY_NONE,
 	RESTORE_NOTE,
 	SORT_DATE,
+	TOGGLE_LOADING,
 	TRASH,
 	TRASH_NOTE,
 	UNARCHIVE_NOTE,
@@ -29,6 +30,7 @@ const removeTag = (tagArray, tag) => {
 };
 
 const intialData = {
+	isLoading: false,
 	showNoteUpdateModal: false,
 	currentNote: {},
 	notes: [],
@@ -43,6 +45,12 @@ const intialData = {
 
 const reducer = (state, action) => {
 	switch (action.type) {
+		case TOGGLE_LOADING:
+			return {
+				...state,
+				isLoading: !state.isLoading,
+			};
+
 		case OPEN_NOTE_UPDATE_MODAL:
 			return {
 				...state,
@@ -118,8 +126,15 @@ const reducer = (state, action) => {
 const NotesProvider = ({ children }) => {
 	const { user } = useAuth();
 	const [state, dispatch] = useReducer(reducer, intialData);
-	const { notes, archives, trash, showNoteUpdateModal, currentNote, filters } =
-		state;
+	const {
+		notes,
+		archives,
+		trash,
+		showNoteUpdateModal,
+		currentNote,
+		filters,
+		isLoading,
+	} = state;
 
 	useEffect(() => {
 		if (user.token) {
@@ -137,6 +152,7 @@ const NotesProvider = ({ children }) => {
 		showNoteUpdateModal,
 		currentNote,
 		filters,
+		isLoading,
 	};
 	return (
 		<NotesContext.Provider value={providerData}>

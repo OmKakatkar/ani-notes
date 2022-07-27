@@ -8,7 +8,7 @@ function Layout() {
 		<>
 			<Header />
 			<SideBar />
-			<main className="main-container flex-container">
+			<main className="main-container">
 				<Outlet className="main-container-body main-container-body-offset" />
 			</main>
 		</>

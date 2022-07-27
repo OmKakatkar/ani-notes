@@ -7,11 +7,14 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { NavLink, useLocation, useSearchParams } from "react-router-dom";
+import { useAuth } from "../../context/auth-context";
 import useDetectClickOutside from "../../hooks/useDetectClickOutside";
 import Filter from "../Filter/Filter";
 import ModalCard from "../ModalCard/ModalCard";
 import "./Header.css";
 function Header() {
+	const { user: currentUser } = useAuth();
+	const { user } = currentUser;
 	const { triggerRef, nodeRef, showItem } = useDetectClickOutside(false);
 	const location = useLocation();
 	const [, setSearchParams] = useSearchParams();
@@ -34,7 +37,7 @@ function Header() {
 				</div>
 			</div>
 			{searchRoutes.includes(location.pathname) && (
-				<form className="header-searchbar-wrapper" onSubmit={handleSearch}>
+				<div className="header-searchbar-wrapper">
 					<label aria-label="search" htmlFor="search" />
 					<input
 						type="search"
@@ -44,7 +47,7 @@ function Header() {
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
 					/>
-					<button className="btn" type="submit">
+					<button className="btn" onClick={handleSearch}>
 						<FontAwesomeIcon icon={faSearch} className="text-white text-lg" />
 					</button>
 					<div>
@@ -60,11 +63,13 @@ function Header() {
 							</ModalCard>
 						)}
 					</div>
-				</form>
+				</div>
 			)}
 			<NavLink to="/profile">
 				<div className="avatar flex-container">
-					<div className="avatar-content text-white font-bold">R</div>
+					<div className="avatar-content text-white font-bold">
+						{user.firstName[0]}
+					</div>
 				</div>
 			</NavLink>
 		</header>

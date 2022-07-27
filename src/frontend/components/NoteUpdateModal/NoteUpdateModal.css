@@ -16,3 +16,8 @@
 	position: relative;
 	padding: 4rem;
 }
+
+
+.modal-body > button.ql-toolbar {
+	color: aqua;
+}

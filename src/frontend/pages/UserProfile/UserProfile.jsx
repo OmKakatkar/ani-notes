@@ -5,10 +5,9 @@ import "./UserProfile.css";
 function UserProfile() {
 	const { user: currentUser, handleLogout } = useAuth();
 	const { user } = currentUser;
-	console.log(user)
 
 	return (
-		<div className="text-white">
+		<div className="text-white flex-container">
 			{currentUser.token && (
 				<div className="profile-wrapper text-xlg">
 					<div>First Name: {user.firstName}</div>

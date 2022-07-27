@@ -5,11 +5,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSearchParams } from "react-router-dom";
+import Masonry from "react-masonry-css";
 import NoteCard from "../../components/NoteCard/NoteCard";
 import NoteUpdateModal from "../../components/NoteUpdateModal/NoteUpdateModal";
 import {
 	ARCHIVE_NOTE,
 	OPEN_NOTE_UPDATE_MODAL,
+	TOGGLE_LOADING,
 	TRASH_NOTE,
 } from "../../constants/reducer-constants";
 import { useAuth } from "../../context/auth-context";
@@ -17,10 +19,13 @@ import { useNotes } from "../../context/notes-context";
 import { addToArchives } from "../../services/notes-archive-service";
 import { addToTrash } from "../../services/notes-trash-service";
 import { getFilteredNotes } from "../../utils/filter-utils";
+import "../Masonry.css";
+import { breakPoints } from "../../constants/masonry-constant";
 
 function Notes() {
 	const { user } = useAuth();
-	const { notes, showNoteUpdateModal, filters, dispatch } = useNotes();
+	const { notes, showNoteUpdateModal, filters, dispatch, isLoading } =
+		useNotes();
 	const [searchParams] = useSearchParams();
 	const search = searchParams.get("search");
 	const filteredNotes = getFilteredNotes(notes, { ...filters, search });
@@ -34,39 +39,69 @@ function Notes() {
 
 	const handleNoteArchive = async (e, note) => {
 		e.preventDefault();
+		dispatch({ type: TOGGLE_LOADING });
 		const { notes, archives } = await addToArchives(note, user.token);
 		dispatch({ type: ARCHIVE_NOTE, payload: { notes, archives } });
+		dispatch({ type: TOGGLE_LOADING });
 	};
 
 	const handleNoteDelete = async (e, noteId) => {
 		e.preventDefault();
+		dispatch({ type: TOGGLE_LOADING });
 		const { notes, trash } = await addToTrash(noteId, user.token);
 		dispatch({ type: TRASH_NOTE, payload: { notes, trash } });
+		dispatch({ type: TOGGLE_LOADING });
 	};
+	console.log(isLoading);
 
 	return (
 		<>
-			{filteredNotes.length > 0 ? filteredNotes.map((note) => (
-				<NoteCard key={note._id} note={note}>
-					<div className="button-container">
-						<button onClick={() => handleNoteUpdate(note)}>
-							<FontAwesomeIcon icon={faEdit} className="text-white text-lg" />
-						</button>
-						<button onClick={(e) => handleNoteDelete(e, note._id)}>
-							<FontAwesomeIcon
-								icon={faTrashAlt}
-								className="text-white text-lg"
-							/>
-						</button>
-						<button onClick={(e) => handleNoteArchive(e, note)}>
-							<FontAwesomeIcon
-								icon={faArchive}
-								className="text-white text-lg"
-							/>
-						</button>
-					</div>
-				</NoteCard>
-			)) : <h1 className="text-xhuge text-white text-center mg-top-2r">No Notes Found</h1>}
+			<h1 className="text-white text-center text-xhuge pad-top-1r">Notes</h1>
+			{filteredNotes.length > 0 ? (
+				<Masonry
+					breakpointCols={breakPoints}
+					className="my-masonry-grid"
+					columnClassName="my-masonry-grid_column"
+				>
+					{filteredNotes.map((note) => (
+						<NoteCard key={note._id} note={note}>
+							<div className="button-container">
+								<button
+									onClick={() => handleNoteUpdate(note)}
+									disabled={isLoading}
+								>
+									<FontAwesomeIcon
+										icon={faEdit}
+										className="text-white text-lg"
+									/>
+								</button>
+								<button
+									onClick={(e) => handleNoteDelete(e, note._id)}
+									disabled={isLoading}
+								>
+									<FontAwesomeIcon
+										icon={faTrashAlt}
+										className="text-white text-lg"
+									/>
+								</button>
+								<button
+									onClick={(e) => handleNoteArchive(e, note)}
+									disabled={isLoading}
+								>
+									<FontAwesomeIcon
+										icon={faArchive}
+										className="text-white text-lg"
+									/>
+								</button>
+							</div>
+						</NoteCard>
+					))}
+				</Masonry>
+			) : (
+				<h1 className="text-xhuge text-white text-center mg-top-2r">
+					No Notes Found
+				</h1>
+			)}
 			{showNoteUpdateModal && <NoteUpdateModal />}
 		</>
 	);

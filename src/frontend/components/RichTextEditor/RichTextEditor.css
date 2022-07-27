@@ -2,6 +2,16 @@
 	min-width: 30rem;
 }
 
-.ql-editor.ql-blank::before {
+.ql-toolbar .ql-stroke {
+	fill: none;
+	stroke: var(--white);
+}
+
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+	fill: var(--white);
+}
+
+.ql-editor.ql-blank:before {
 	color: var(--white);
 }
