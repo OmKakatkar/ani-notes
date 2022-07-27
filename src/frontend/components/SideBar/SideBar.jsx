@@ -2,14 +2,18 @@ import {
 	faHome,
 	faArchive,
 	faTrashAlt,
-	faStickyNote,
+	faAdd,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { OPEN_NOTE_CREATE_MODAL } from "../../constants/reducer-constants";
 import { useAuth } from "../../context/auth-context";
+import { useNotes } from "../../context/notes-context";
 import "./SideBar.css";
 function SideBar() {
 	const { user } = useAuth();
+	const { dispatch } = useNotes();
+	const location = useLocation();
 	return (
 		<div className="sidebar">
 			<div className="sidebar-spacer"></div>
@@ -39,15 +43,16 @@ function SideBar() {
 										<span>Bin</span>
 									</NavLink>
 								</li>
-								<li className="sidebar-list-item">
-									<NavLink
-										to="/new-note"
-										className="sidebar-item-link text-white"
+								{location.pathname !== "/profile" && (
+									<button
+										className="sidebar-item-link text-white bg-blue"
+										onClick={() => dispatch({ type: OPEN_NOTE_CREATE_MODAL })}
 									>
-										<FontAwesomeIcon icon={faStickyNote} className="text-lg" />
-										<span>Create New</span>
-									</NavLink>
-								</li>
+										<FontAwesomeIcon icon={faAdd} className="text-lg" />
+
+										<span>Create Post</span>
+									</button>
+								)}
 							</>
 						)}
 					</ul>

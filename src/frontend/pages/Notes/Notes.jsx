@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSearchParams } from "react-router-dom";
 import Masonry from "react-masonry-css";
 import NoteCard from "../../components/NoteCard/NoteCard";
-import NoteUpdateModal from "../../components/NoteUpdateModal/NoteUpdateModal";
+import NoteModal from "../../components/NoteModal/NoteModal";
 import {
 	ARCHIVE_NOTE,
 	OPEN_NOTE_UPDATE_MODAL,
@@ -24,8 +24,7 @@ import { breakPoints } from "../../constants/masonry-constant";
 
 function Notes() {
 	const { user } = useAuth();
-	const { notes, showNoteUpdateModal, filters, dispatch, isLoading } =
-		useNotes();
+	const { notes, showNoteModal, filters, dispatch, isLoading } = useNotes();
 	const [searchParams] = useSearchParams();
 	const search = searchParams.get("search");
 	const filteredNotes = getFilteredNotes(notes, { ...filters, search });
@@ -97,11 +96,11 @@ function Notes() {
 					))}
 				</Masonry>
 			) : (
-				<h1 className="text-xhuge text-white text-center mg-top-2r">
-					No Notes Found
-				</h1>
+				<p className="text-huge text-white text-center mg-top-2r">
+					It is so empty here...
+				</p>
 			)}
-			{showNoteUpdateModal && <NoteUpdateModal />}
+			{showNoteModal && <NoteModal />}
 		</>
 	);
 }

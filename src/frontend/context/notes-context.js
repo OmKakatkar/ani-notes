@@ -7,6 +7,7 @@ import {
 	FILTER_PRIORITY,
 	FILTER_TAG,
 	NOTES,
+	OPEN_NOTE_CREATE_MODAL,
 	OPEN_NOTE_UPDATE_MODAL,
 	PRIORITY_NONE,
 	RESTORE_NOTE,
@@ -29,10 +30,20 @@ const removeTag = (tagArray, tag) => {
 	return tagArray.filter((currTag) => currTag !== tag);
 };
 
+const initialNoteData = {
+	title: "",
+	description: "",
+	noteColor: "#a0a0a0",
+	priority: "low",
+	tags: [],
+	createdAt: "",
+	updatedAt: "",
+};
+
 const intialData = {
 	isLoading: false,
-	showNoteUpdateModal: false,
-	currentNote: {},
+	showNoteModal: false,
+	currentNote: initialNoteData,
 	notes: [],
 	archives: [],
 	trash: [],
@@ -50,19 +61,28 @@ const reducer = (state, action) => {
 				...state,
 				isLoading: !state.isLoading,
 			};
-
+		case OPEN_NOTE_CREATE_MODAL:
+			return {
+				...state,
+				showNoteModal: true,
+				currentNote: initialNoteData,
+			};
 		case OPEN_NOTE_UPDATE_MODAL:
 			return {
 				...state,
-				showNoteUpdateModal: true,
+				showNoteModal: true,
 				currentNote: action.payload.currentNote,
 			};
 		case CLOSE_NOTE_UPDATE_MODAL:
-			return { ...state, showNoteUpdateModal: false, currentNote: {} };
+			return {
+				...state,
+				showNoteModal: false,
+				currentNote: initialNoteData,
+			};
 		case UPDATE_NOTE:
 			return {
 				...state,
-				showNoteUpdateModal: false,
+				showNoteModal: false,
 				notes: [...action.payload.notes],
 			};
 		case NOTES:
@@ -130,7 +150,7 @@ const NotesProvider = ({ children }) => {
 		notes,
 		archives,
 		trash,
-		showNoteUpdateModal,
+		showNoteModal,
 		currentNote,
 		filters,
 		isLoading,
@@ -149,7 +169,7 @@ const NotesProvider = ({ children }) => {
 		notes,
 		archives,
 		trash,
-		showNoteUpdateModal,
+		showNoteModal,
 		currentNote,
 		filters,
 		isLoading,

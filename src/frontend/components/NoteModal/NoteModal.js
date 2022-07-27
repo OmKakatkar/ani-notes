@@ -1,29 +1,21 @@
-import "./NoteUpdateModal.css";
 import { useState } from "react";
 import { useAuth } from "../../context/auth-context";
 import { useNotes } from "../../context/notes-context";
-import { CLOSE_NOTE_UPDATE_MODAL } from "../../constants/reducer-constants";
+import {
+	CLOSE_NOTE_UPDATE_MODAL,
+	NOTES,
+} from "../../constants/reducer-constants";
 import Input from "../Input/Input";
-import { updateNote } from "../../services/notes-service";
+import { createNote, updateNote } from "../../services/notes-service";
 import { UPDATE_NOTE } from "../../constants/reducer-constants";
 import { RichTextEditor } from "../RichTextEditor/RichTextEditor";
 import { formatDate } from "../../../backend/utils/authUtils";
+import "./NoteModal.css";
 
 function NoteUpdateModal() {
 	const { user } = useAuth();
 	const { dispatch, currentNote } = useNotes();
-	const { title, description, noteColor, priority, tags, _id, createdAt } =
-		currentNote;
-
-	const [noteData, setNoteData] = useState({
-		title,
-		description,
-		noteColor,
-		priority,
-		tags,
-		createdAt,
-		_id,
-	});
+	const [noteData, setNoteData] = useState(currentNote);
 
 	const closeModal = (e) => {
 		if (e.target.id === "modal") {
@@ -33,8 +25,20 @@ function NoteUpdateModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const resp = await updateNote({...noteData, updatedAt: formatDate()}, user.token);
-		dispatch({ type: UPDATE_NOTE, payload: { notes: resp } });
+		if (currentNote.title === "") {
+			const resp = await createNote(
+				{ ...noteData, createdAt: formatDate(), updatedAt: formatDate() },
+				user.token
+			);
+			dispatch({ type: NOTES, payload: { notes: resp } });
+			dispatch({ type: CLOSE_NOTE_UPDATE_MODAL });
+		} else {
+			const resp = await updateNote(
+				{ ...noteData, updatedAt: formatDate() },
+				user.token
+			);
+			dispatch({ type: UPDATE_NOTE, payload: { notes: resp } });
+		}
 	};
 
 	const handleChange = (e) => {
@@ -94,7 +98,7 @@ function NoteUpdateModal() {
 							classNames="text-white"
 						/>
 						<button type="submit" className="btn rounded bd-blue">
-							Update
+							{currentNote.title === "" ? "Add" : "Update"}
 						</button>
 					</form>
 				</div>
