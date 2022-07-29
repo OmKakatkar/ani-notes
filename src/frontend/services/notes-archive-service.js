@@ -1,12 +1,11 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
 	API_DELETE_ARCHIVES,
 	API_GET_ARCHIVES,
 	API_POST_ARCHIVES,
 	API_RESTORE_ARCHIVES,
 } from "../constants/api-constant";
-import { success } from "../constants/toast-constants";
-import { notify } from "../utils/notify";
 
 /**
  * Get archive notes
@@ -43,7 +42,7 @@ export const addToArchives = async (note, authToken) => {
 				},
 			}
 		);
-		notify(success, "Note Archived");
+		toast.success("Note Archived");
 		return { ...data };
 	} catch (err) {
 		console.error(err);
@@ -87,7 +86,7 @@ export const deleteFromArchives = async (noteId, authToken) => {
 				authorization: authToken,
 			},
 		});
-		notify(success, "Moved to trash");
+		toast.success("Moved to trash");
 		console.log(data);
 		return { ...data };
 	} catch (err) {

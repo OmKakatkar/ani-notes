@@ -1,11 +1,10 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
 	API_LOGIN,
 	API_SIGNUP,
 	API_USER_PROFILE,
 } from "../constants/api-constant";
-import { notify } from "../utils/notify";
-import { error, success } from "../constants/toast-constants";
 
 /**
  * Login the user if email and password are correct
@@ -19,14 +18,14 @@ export const login = async ({ email, password }) => {
 			email,
 			password,
 		});
-		notify(success, "Login Successful!");
+		toast.success("Login Successful!");
 		return data;
 	} catch (err) {
 		if (err.response.status === 404 || err.response.status === 401) {
-			notify(error, "Wrong email or password");
+			toast.error("Wrong email or password");
 		} else {
 			console.error(err.response.status);
-			notify(error, "Internal Error");
+			toast.error("Internal Error");
 		}
 		return {};
 	}
@@ -48,14 +47,14 @@ export const signup = async ({ firstName, lastName, email, password }) => {
 			email,
 			password,
 		});
-		notify(success, "SignUp Successful!");
+		toast.success("SignUp Successful!");
 		return data;
 	} catch (err) {
 		if (err.response.status === 422) {
-			notify(error, "User Already Exists, check your credentials");
+			toast.error("User Already Exists, check your credentials");
 		} else {
 			console.error(err.response.status);
-			notify(error, "Internal Error");
+			toast.error("Internal Error");
 		}
 		return {};
 	}

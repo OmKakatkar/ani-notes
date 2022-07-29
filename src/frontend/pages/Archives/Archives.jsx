@@ -5,6 +5,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Masonry from "react-masonry-css";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import NoteCard from "../../components/NoteCard/NoteCard";
 import { breakPoints } from "../../constants/masonry-constant";
 import {
@@ -12,13 +13,11 @@ import {
 	TRASH_NOTE,
 	UNARCHIVE_NOTE,
 } from "../../constants/reducer-constants";
-import { success } from "../../constants/toast-constants";
 import { useAuth } from "../../context/auth-context";
 import { useNotes } from "../../context/notes-context";
 import { restoreFromArchives } from "../../services/notes-archive-service";
 import { addToTrash } from "../../services/notes-trash-service";
 import { getFilteredNotes } from "../../utils/filter-utils";
-import { notify } from "../../utils/notify";
 
 function Archives() {
 	const { user } = useAuth();
@@ -45,7 +44,7 @@ function Archives() {
 		dispatch({ type: TOGGLE_LOADING });
 		const { notes, archives } = await restoreFromArchives(noteId, user.token);
 		dispatch({ type: UNARCHIVE_NOTE, payload: { notes, archives } });
-		notify(success, "Note Unarchived");
+		toast.success("Note Unarchived");
 		dispatch({ type: TOGGLE_LOADING });
 	};
 

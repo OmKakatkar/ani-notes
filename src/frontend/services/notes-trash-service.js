@@ -1,12 +1,11 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
 	API_DELETE_TRASH,
 	API_GET_TRASH,
 	API_POST_TRASH,
 	API_RESTORE_TRASH,
 } from "../constants/api-constant";
-import { success } from "../constants/toast-constants";
-import { notify } from "../utils/notify";
 
 /**
  * Get trashed notes
@@ -43,7 +42,7 @@ export const addToTrash = async (noteId, authToken) => {
 				},
 			}
 		);
-		notify(success, "Moved to trash");
+		toast.success("Moved to trash");
 		return { ...data };
 	} catch (err) {
 		console.error(err);
@@ -67,7 +66,7 @@ export const restoreFromTrash = async (noteId, authToken) => {
 				},
 			}
 		);
-		notify(success, "Note Restored");
+		toast.success("Note Restored");
 		return { ...data };
 	} catch (err) {
 		console.error(err);
@@ -87,7 +86,7 @@ export const deleteFromTrash = async (noteId, authToken) => {
 				authorization: authToken,
 			},
 		});
-		notify(success, "Note Deleted");
+		toast.success("Note Deleted");
 		return { ...data };
 	} catch (err) {
 		console.error(err);

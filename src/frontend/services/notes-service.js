@@ -1,7 +1,6 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { API_NOTES } from "../constants/api-constant";
-import { success } from "../constants/toast-constants";
-import { notify } from "../utils/notify";
 
 /**
  * Create new note
@@ -22,7 +21,7 @@ export const createNote = async (note, authToken) => {
 				},
 			}
 		);
-		notify(success, "New Note Created!");
+		toast.success("New Note Created!");
 		return data.notes;
 	} catch (err) {
 		console.error(err);
@@ -66,7 +65,7 @@ export const updateNote = async (note, authToken) => {
 				},
 			}
 		);
-		notify(success, "Note Updated!");
+		toast.success("Note Updated!");
 		return data.notes;
 	} catch (err) {
 		console.error(err);
@@ -86,7 +85,7 @@ export const deleteNotePermanent = async (noteId, authToken) => {
 				authorization: authToken,
 			},
 		});
-		notify(success, "Note Deleted!");
+		toast.success("Note Deleted!");
 		return data.notes;
 	} catch (err) {
 		console.error(err);
