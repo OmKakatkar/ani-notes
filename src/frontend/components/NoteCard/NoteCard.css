@@ -5,3 +5,22 @@
 	width: 50%;
 	margin-right: auto;
 }
+
+.button-container button {
+	position: relative;
+}
+
+.button-tooltip {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(50%, -100%);
+	background-color: var(--white);
+	padding: var(--padding-1r);
+	z-index: 10;
+	visibility: hidden;
+}
+
+.button-container button:hover .button-tooltip {
+	visibility: visible;
+}
