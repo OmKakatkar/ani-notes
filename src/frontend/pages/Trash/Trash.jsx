@@ -60,6 +60,7 @@ function Trash() {
 										icon={faTrashAlt}
 										className="text-white text-lg"
 									/>
+									<div className="button-tooltip">Delete Forever</div>
 								</button>
 
 								<button
@@ -70,6 +71,7 @@ function Trash() {
 										icon={faTrashRestore}
 										className="text-white text-lg"
 									/>
+									<div className="button-tooltip">Restore</div>
 								</button>
 							</div>
 						</NoteCard>
