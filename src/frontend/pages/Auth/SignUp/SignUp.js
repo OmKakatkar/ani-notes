@@ -30,6 +30,7 @@ function SignUp() {
 
 	const handleGuestSignUp = () => {
 		setSignUpData(TEST_USER_SIGNUP);
+		setAcceptTnC(true);
 	};
 
 	return (
@@ -37,44 +38,38 @@ function SignUp() {
 			<div className="form-container">
 				<form className="flex-container flex-column" onSubmit={handleSubmit}>
 					<h1 className="text-xhuge form-heading">Sign Up</h1>
-					{SIGNUP_DB.map(({ id, type, label, name, autoComplete }) => (
-						<Input
-							key={id}
-							type={type}
-							label={label}
-							name={name}
-							autoComplete={autoComplete}
-							value={signUpData[name]}
-							handleChange={handleChange}
-						/>
-					))}
+					{SIGNUP_DB.map(
+						({ id, type, label, name, autoComplete, required }) => (
+							<Input
+								key={id}
+								type={type}
+								label={label}
+								name={name}
+								autoComplete={autoComplete}
+								value={signUpData[name]}
+								handleChange={handleChange}
+								required={required}
+							/>
+						)
+					)}
 					<div className="input-container">
 						<label htmlFor="remember" className="checkbox text-xsm">
 							<input
 								type="checkbox"
 								name="remember"
 								id="remember"
-								className="checkbox-input"
+								required={true}
+								className="checkbox-input form-checkbox"
 								checked={acceptTnC}
 								onChange={() =>
 									setAcceptTnC((currentAcceptTnC) => !currentAcceptTnC)
 								}
 							/>
 							<div className="checkbox-icon"></div>I accept all Terms &
-							Conditions
+							Conditions*
 						</label>
 					</div>
-					<button
-						type="submit"
-						className="btn rounded bg-blue"
-						disabled={
-							!signUpData.firstName ||
-							!signUpData.lastName ||
-							!signUpData.email ||
-							!signUpData.password ||
-							!acceptTnC
-						}
-					>
+					<button type="submit" className="btn rounded bg-blue">
 						Create New Account
 					</button>
 				</form>
@@ -83,7 +78,7 @@ function SignUp() {
 					className="btn rounded bd-blue"
 					onClick={handleGuestSignUp}
 				>
-					Guest Credentials
+					Fill Guest Credentials
 				</button>
 				<div className="text-center">
 					<Link to="/login" className="form-link">

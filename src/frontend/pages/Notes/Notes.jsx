@@ -72,6 +72,7 @@ function Notes() {
 										icon={faEdit}
 										className="text-white text-lg"
 									/>
+									<div className="button-tooltip">Edit</div>
 								</button>
 								<button
 									onClick={(e) => handleNoteDelete(e, note._id)}
@@ -81,6 +82,7 @@ function Notes() {
 										icon={faTrashAlt}
 										className="text-white text-lg"
 									/>
+									<div className="button-tooltip">Delete</div>
 								</button>
 								<button
 									onClick={(e) => handleNoteArchive(e, note)}
@@ -90,6 +92,7 @@ function Notes() {
 										icon={faArchive}
 										className="text-white text-lg"
 									/>
+									<div className="button-tooltip">Archive</div>
 								</button>
 							</div>
 						</NoteCard>

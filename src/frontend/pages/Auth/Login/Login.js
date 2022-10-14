@@ -43,7 +43,7 @@ function Login() {
 			<div className="form-container">
 				<form className="flex-container flex-column" onSubmit={handleSubmit}>
 					<h1 className="text-xhuge form-heading">Login</h1>
-					{LOGIN_DB.map(({ id, type, label, name, autoComplete }) => (
+					{LOGIN_DB.map(({ id, type, label, name, autoComplete, required }) => (
 						<Input
 							key={id}
 							type={type}
@@ -52,6 +52,7 @@ function Login() {
 							autoComplete={autoComplete}
 							value={loginData[name]}
 							handleChange={handleChange}
+							required={required}
 						/>
 					))}
 					<div className="input-container input-wrap">
@@ -60,7 +61,7 @@ function Login() {
 								type="checkbox"
 								name="isLoginRemember"
 								id="isLoginRemember"
-								className="checkbox-input"
+								className="checkbox-input form-checkbox"
 								checked={isLoginRemember}
 								onChange={() =>
 									setIsLoginRemember(
@@ -75,11 +76,7 @@ function Login() {
 							Forgot Password?
 						</Link> */}
 					</div>
-					<button
-						type="submit"
-						className="btn rounded bg-blue"
-						disabled={!loginData.email || !loginData.password}
-					>
+					<button type="submit" className="btn rounded bg-blue">
 						Login
 					</button>
 				</form>
@@ -88,7 +85,7 @@ function Login() {
 					className="btn rounded bd-blue"
 					onClick={handleGuestLogin}
 				>
-					Guest Login
+					Fill Guest Credentials
 				</button>
 				<div className="text-center">
 					<Link to="/signup" className="form-link">

@@ -68,6 +68,7 @@ function Archives() {
 										icon={faTrashAlt}
 										className="text-white text-lg"
 									/>
+									<div className="button-tooltip">Delete</div>
 								</button>
 
 								<button
@@ -78,6 +79,7 @@ function Archives() {
 										icon={faArrowAltCircleUp}
 										className="text-white text-lg"
 									/>
+									<div className="button-tooltip">Unarchive</div>
 								</button>
 							</div>
 						</NoteCard>

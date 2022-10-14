@@ -31,3 +31,7 @@
 	margin-top: 1rem;
 	color: var(--primary-blue);
 }
+
+.form-checkbox {
+	width: 1px;	
+}

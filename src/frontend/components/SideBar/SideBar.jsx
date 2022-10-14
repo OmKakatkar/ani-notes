@@ -50,7 +50,7 @@ function SideBar() {
 									>
 										<FontAwesomeIcon icon={faAdd} className="text-lg" />
 
-										<span>Create Post</span>
+										<span>Create Note</span>
 									</button>
 								)}
 							</>
