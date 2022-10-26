@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { NoteType } from '../components/NoteCard/NoteCard';
 import { API_NOTES } from '../constants/api-constant';
+import { NoteType } from './auth-service';
 
 /**
  * Create new note

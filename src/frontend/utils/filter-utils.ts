@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import { NoteType } from '../components/NoteCard/NoteCard';
 import {
   DATE_LATEST,
   DATE_OLDEST,
@@ -8,6 +7,7 @@ import {
   PRIORITY_LOW,
   PRIORITY_MEDIUM,
 } from '../constants/reducer-constants';
+import { NoteType } from '../services/auth-service';
 
 const filterByPriority = (notes: NoteType[], priority: string) => {
   switch (priority) {

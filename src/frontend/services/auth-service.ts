@@ -1,21 +1,51 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
-import {
-  API_LOGIN,
-  API_SIGNUP,
-  API_USER_PROFILE,
-} from '../constants/api-constant';
+import { API_LOGIN, API_SIGNUP } from '../constants/api-constant';
 
-type LoginType = {
+export type LoginType = {
   email: string;
   password: string;
 };
 
-type SignUpType = {
+type LoginReturnType = {
+  encodedToken: string;
+  foundUser: AuthUserType;
+};
+
+export type SignUpType = {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+};
+
+type SignUpReturnType = {
+  encodedToken: string;
+  createdUser: AuthUserType;
+};
+
+export type AuthUserType = {
+  createdAt: string;
+  email: string;
+  firstName: string;
+  id: string;
+  lastName: string;
+  updatedAt: string;
+  _id: string;
+  archives: NoteType[];
+  notes: NoteType[];
+  trash: NoteType[];
+};
+
+export type NoteType = {
+  createdAt: string;
+  description: string;
+  noteColor: string;
+  priority: 'low' | 'medium' | 'high';
+  tags: string[];
+  title: string;
+  updatedAt: string;
+  _id: string;
 };
 
 /**
@@ -24,10 +54,13 @@ type SignUpType = {
 
 export const login = async ({ email, password }: LoginType) => {
   try {
-    const { data } = await axios.post(API_LOGIN, {
-      email,
-      password,
-    });
+    const { data }: AxiosResponse<LoginReturnType> = await axios.post(
+      API_LOGIN,
+      {
+        email,
+        password,
+      }
+    );
     toast.success('Login Successful!');
     return data;
   } catch (error) {
@@ -39,6 +72,7 @@ export const login = async ({ email, password }: LoginType) => {
         toast.error('Internal Error');
       }
     }
+    return {} as LoginReturnType;
   }
 };
 
@@ -52,12 +86,15 @@ export const signup = async ({
   password,
 }: SignUpType) => {
   try {
-    const { data } = await axios.post(API_SIGNUP, {
-      firstName,
-      lastName,
-      email,
-      password,
-    });
+    const { data }: AxiosResponse<SignUpReturnType> = await axios.post(
+      API_SIGNUP,
+      {
+        firstName,
+        lastName,
+        email,
+        password,
+      }
+    );
     toast.success('SignUp Successful!');
     return data;
   } catch (error) {
@@ -70,22 +107,5 @@ export const signup = async ({
       }
     }
   }
-};
-
-/**
- * Get user profile
- */
-export const getUserDetails = async (authToken: string) => {
-  try {
-    const {
-      data: { user },
-    } = await axios.get(API_USER_PROFILE, {
-      headers: {
-        authorization: authToken,
-      },
-    });
-    return user;
-  } catch (err) {
-    console.error(err);
-  }
+  return {} as SignUpReturnType;
 };

@@ -1,15 +1,5 @@
+import { NoteType } from '../../services/auth-service';
 import './NoteCard.css';
-
-export type NoteType = {
-  createdAt: string;
-  description: string;
-  noteColor: string;
-  priority: 'low' | 'medium' | 'high';
-  tags: string[];
-  title: string;
-  updatedAt: string;
-  _id: string;
-};
 
 type NoteCardProps = {
   note: NoteType;

@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { NoteType } from '../components/NoteCard/NoteCard';
 import {
   API_DELETE_ARCHIVES,
   API_GET_ARCHIVES,
   API_POST_ARCHIVES,
   API_RESTORE_ARCHIVES,
 } from '../constants/api-constant';
+import { NoteType } from './auth-service';
 
 /**
  * Get archive notes
