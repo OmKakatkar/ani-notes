@@ -41,11 +41,11 @@ export type NoteType = {
   createdAt: string;
   description: string;
   noteColor: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: string;
   tags: string[];
   title: string;
   updatedAt: string;
-  _id: string;
+  _id?: string;
 };
 
 /**
