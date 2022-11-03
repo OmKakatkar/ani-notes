@@ -60,7 +60,7 @@ type NotesActionPayload = {
   [TRASH]: { trash: NoteType[] };
   [FILTER_PRIORITY]: { filters: { priority: string } };
   [FILTER_TAG]: { tag: string };
-  [SORT_DATE]: { dateTime: string };
+  [SORT_DATE]: string;
 };
 
 type NotesAction =
@@ -193,7 +193,7 @@ const reducer = (state: NotesState, action: NotesAction) => {
         ...state,
         filters: {
           ...state.filters,
-          dateTime: action.payload.dateTime,
+          dateTime: action.payload,
         },
       };
     default:

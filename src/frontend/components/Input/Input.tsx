@@ -4,11 +4,11 @@ type InputProps = {
   type: string;
   label: string;
   name: string;
-  autoComplete: string;
-  value: string;
+  autoComplete?: string;
+  value: string | string[];
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   classNames?: string;
-  required: boolean;
+  required?: boolean;
 };
 
 function Input({

@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 //           triggerRef to reference the node that triggers the state
 function useDetectClickOutside(initialState: boolean = false) {
   const nodeRef = useRef<HTMLDivElement>(null!);
-  const triggerRef = useRef<HTMLDivElement>(null!);
+  const triggerRef = useRef<HTMLButtonElement>(null!);
 
   const [showItem, setShowItem] = useState(initialState);
 
