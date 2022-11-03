@@ -13,7 +13,7 @@ const modules = {
 
 type RichTextEditorProps = {
   value: string;
-  onChange: (html: string) => void;
+  onChange: (content: string) => void;
 };
 
 export const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {

@@ -20,7 +20,7 @@ function Header() {
   const [, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchParams({ search: searchQuery });
     setSearchQuery('');

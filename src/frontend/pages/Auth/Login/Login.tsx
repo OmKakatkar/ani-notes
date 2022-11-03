@@ -32,13 +32,13 @@ function Login() {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await handleLogin(loginData, isLoginRemember);
     navigate(redirectPath, { replace: true });
   };
 
-  const handleGuestLogin = async (e: React.MouseEvent) => {
+  const handleGuestLogin = async () => {
     setLoginData(TEST_USER_LOGIN);
     setIsLoginRemember(true);
   };

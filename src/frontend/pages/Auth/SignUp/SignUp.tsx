@@ -23,7 +23,7 @@ function SignUp() {
   const [signUpData, setSignUpData] = useState(initialSignUpData);
   const [acceptTnC, setAcceptTnC] = useState(false);
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await handleSignUp(signUpData);
   };

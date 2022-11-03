@@ -23,7 +23,7 @@ function NoteUpdateModal() {
     }
   };
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (currentNote.title === '') {
       const resp = await createNote(
@@ -68,10 +68,9 @@ function NoteUpdateModal() {
               <label htmlFor='description'>Description</label>
               <RichTextEditor
                 value={noteData.description}
-                onChange={(html) =>
-                  setNoteData({ ...noteData, description: html.toString() })
+                onChange={(content) =>
+                  setNoteData({ ...noteData, description: content })
                 }
-                // id='description'
               />
             </div>
             <Input

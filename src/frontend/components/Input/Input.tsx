@@ -6,7 +6,7 @@ type InputProps = {
   name: string;
   autoComplete?: string;
   value: string | string[];
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: React.ChangeEventHandler<HTMLInputElement>;
   classNames?: string;
   required?: boolean;
 };
