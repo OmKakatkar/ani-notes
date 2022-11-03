@@ -48,7 +48,7 @@ const sortByDate = (notes: NoteType[], dateTime: string) => {
   }
 };
 
-const searchNotes = (notes: NoteType[], search: string) => {
+const searchNotes = (notes: NoteType[], search: string | null) => {
   if (search) {
     return notes.filter(({ title }) =>
       title.toString().toLowerCase().includes(search.toString().toLowerCase())
@@ -60,7 +60,7 @@ const searchNotes = (notes: NoteType[], search: string) => {
 export const getFilteredNotes = (
   notes: NoteType[],
   filters: {
-    search: string;
+    search: string | null;
     priority: string;
     tags: string[];
     dateTime: string;
