@@ -28,7 +28,6 @@ export const getArchiveNotes = async (authToken: string) => {
  * Add a note to archives
  */
 export const addToArchives = async (note: NoteType, authToken: string) => {
-  // export const addToArchives = async (note: NoteType, authToken: string) => {
   try {
     const { data } = await axios.post(
       `${API_POST_ARCHIVES}/${note._id}`,
@@ -72,9 +71,6 @@ export const restoreFromArchives = async (
 
 /**
  * Delete note from archives
- * @param {string} noteId
- * @param {string} authToken
- * @return archives
  */
 export const deleteFromArchives = async (noteId: string, authToken: string) => {
   try {
