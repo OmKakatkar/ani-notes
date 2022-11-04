@@ -2,7 +2,7 @@ import { useLocation, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth-context';
 
 type PrivateRouteProps = {
-  children: React.ReactNode;
+  children: JSX.Element;
 };
 
 function PrivateRoute({ children }: PrivateRouteProps) {
