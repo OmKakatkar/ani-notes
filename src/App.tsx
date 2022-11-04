@@ -11,6 +11,7 @@ import Archives from "./frontend/pages/Archives/Archives";
 import Trash from "./frontend/pages/Trash/Trash";
 import Notes from "./frontend/pages/Notes/Notes";
 import Auth from "./frontend/components/Auth/Auth";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
 	return (
@@ -35,7 +36,7 @@ function App() {
 				<Route path="mock" element={<MockAPI />} />
 				<Route path="*" />
 			</Routes>
-			<ToastContainer autoClose={2000} />
+			<ToastContainer autoClose={2000} position="bottom-left" limit={2} />
 		</div>
 	);
 }
